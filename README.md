@@ -160,13 +160,26 @@ To run Novoalign, a trial license is required. Please request one from Novocraft
 ## Instructions
 **TL;DR**
 
+Command template:
 ```
-docker run -v </your/volume>:</your/volume> -v </path/to/novoalign.lic>:/home/novocraft/novoalign.lic -e HOST_DIR=$(pwd) pipeline:latest -S HG001 -n WES -m novoalign
+docker run -v $(pwd):$(pwd) -v </path/to/novoalign.lic>:/home/novocraft/novoalign.lic -e HOST_DIR=$(pwd) pipeline:latest -S <HG001|..|HG004> -n <WES|WGS> -m <novoalign|bwa>
 ```
-    
+
+**Details**
+
+Basic command structure:
+```
+docker run -v <your/volume>:<your/volume> -v </path/to/novoalign.lic>:/home/novocraft/novoalign.lic -e HOST_DIR=<path/to/desired/directory> pipeline:latest -S <HG001|..|HG004> -n <WES|WGS> -m <novoalign|bwa>
+```
+
+The -e HOST_DIR parameter sets the docker environment to point to your directory and will be used to as a main diretory for all the resources to be downloaded. 
+The path should be the same or be under the directory in the first option in the -v mount.
+
+Both the -v <your/volume>:<your/volume> and -e HOST_DIR=<path/to/your/dir> are required if you are wondering.
+
 Example:
 ```
-docker run -v /export:/export -v /export/home/usr1/novocraft/novoalign.lic:/home/novocraft/novoalign.lic -e HOST_DIR=$(pwd) pipeline:latest -S hg004 -n WES -m novoalign
+docker run -v /home:/home -v /export/home/usr1/novocraft/novoalign.lic:/home/novocraft/novoalign.lic -e HOST_DIR=$(pwd) pipeline:latest -S hg004 -n WES -m novoalign
 ```
 
 Note: If the directory that contains the GIAB_benchmark is somewhere else, then please change the path in -e HOST_DIR to your path (-e HOST_DIR=/path/to/your/dir).
@@ -189,7 +202,7 @@ Optional options:
  -h                 Print this help message.
 ```
 
-You can run ``` docker run -v </your/volume>:</your/volume> pipeline:latest ``` to view the parameters required and available.
+You can run ``` docker run pipeline:latest ``` to view the parameters required and available.
 
 ## Directories and resources
 ### Directories
