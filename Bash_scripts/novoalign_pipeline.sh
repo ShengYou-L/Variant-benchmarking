@@ -53,7 +53,7 @@ novoalign \
     -c $threads \
     --tune NOVASEQ \
     -o BAM 1 $rginfo > $MAPbam \
-    2>`pwd`/novoalign.log \
+    2>`pwd`/novoalign_mapping.log \
     && echo "[Status]: Finish novoalign" || echo "[Status]: Failed" 
 time_func
 if [ -e ${MAPbam} ]; then
