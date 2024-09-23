@@ -131,9 +131,9 @@ Note: All analysis were done on a server with 32 cores and 64 threads.
 
 ## Installation
 
-You can docker pull the [docker image for this pipeline]() from docker hub.
+You can docker pull the [docker image for this pipeline](https://hub.docker.com/r/novocraft/variants_benchmark) from docker hub.
 
-    docker pull
+    docker pull novocraft/variants_benchmark
 
 Note: If you pull from docker hub, you might want to download the "GIAB_benchmark" directory from this repository that contains the WES Agilent Kit regions/intervals file which is not easily downloadable with a link.
 
@@ -175,14 +175,15 @@ docker run -v <your/volume>:<your/volume> -v </path/to/novoalign.lic>:/home/novo
 The -e HOST_DIR parameter sets the docker environment to point to your directory and will be used to as a main diretory for all the resources to be downloaded. 
 The path should be the same or be under the directory in the first option in the -v mount.
 
-Both the -v <your/volume>:<your/volume> and -e HOST_DIR=<path/to/your/dir> are required if you are wondering.
-
 Example:
 ```
 docker run -v /home:/home -v /export/home/usr1/novocraft/novoalign.lic:/home/novocraft/novoalign.lic -e HOST_DIR=$(pwd) variant-benchmarking:latest -S hg004 -n WES -m novoalign
 ```
 
-Note: If the directory that contains the GIAB_benchmark is somewhere else, then please change the path in -e HOST_DIR to your path (-e HOST_DIR=/path/to/your/dir).
+*Note: 
+1. If the directory that contains the GIAB_benchmark is somewhere else, then please change the path in -e HOST_DIR to your path (-e HOST_DIR=/path/to/your/dir).
+2. You can change the -v option to your root directory like /home:/home and -e HOST_DIR parameter to your desired location output directory. Both the -v <your/volume>:<your/volume> and -e HOST_DIR=<path/to/your/dir> are required if you are wondering.
+3. If you are not using Novoalign, then you don't have to mount the Novoalign license.
 
 ### Options
 ```
