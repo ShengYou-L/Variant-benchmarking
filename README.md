@@ -4,7 +4,7 @@
 
 This project compares the GIAB high confidence variant calls to the variant calls from different pipelines using hg38 reference genome and hg38 HG001 to HG004 sample reads. Illumina/hap.py was used for the benchmarking process.
 
-If you are interested in reproducing the result, then you can either try run the pipelines using [docker]() or you can download this repository and build the docker image using the Dockerfile and resources provided.
+If you are interested in reproducing the result, then you can either try run the pipelines using [docker](https://hub.docker.com/r/novocraft/variants_benchmark) or you can download this repository and build the docker image using the Dockerfile and resources provided.
 
 ## Pipelines used in this project
 
