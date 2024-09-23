@@ -160,13 +160,26 @@ To run Novoalign, a trial license is required. Please request one from Novocraft
 ## Instructions
 **TL;DR**
 
+Command template:
 ```
-docker run -v </your/volume>:</your/volume> -v </path/to/novoalign.lic>:/home/novocraft/novoalign.lic -e HOST_DIR=$(pwd) pipeline:latest -S HG001 -n WES -m novoalign
+docker run -v $(pwd):$(pwd) -v </path/to/novoalign.lic>:/home/novocraft/novoalign.lic -e HOST_DIR=$(pwd) variant-benchmarking:latest -S <HG001|..|HG004> -n <WES|WGS> -m <novoalign|bwa>
 ```
-    
+
+**Details**
+
+Basic command structure:
+```
+docker run -v <your/volume>:<your/volume> -v </path/to/novoalign.lic>:/home/novocraft/novoalign.lic -e HOST_DIR=<path/to/desired/directory> variant-benchmarking:latest -S <HG001|..|HG004> -n <WES|WGS> -m <novoalign|bwa>
+```
+
+The -e HOST_DIR parameter sets the docker environment to point to your directory and will be used to as a main diretory for all the resources to be downloaded. 
+The path should be the same or be under the directory in the first option in the -v mount.
+
+Both the -v <your/volume>:<your/volume> and -e HOST_DIR=<path/to/your/dir> are required if you are wondering.
+
 Example:
 ```
-docker run -v /export:/export -v /export/home/usr1/novocraft/novoalign.lic:/home/novocraft/novoalign.lic -e HOST_DIR=$(pwd) pipeline:latest -S hg004 -n WES -m novoalign
+docker run -v /home:/home -v /export/home/usr1/novocraft/novoalign.lic:/home/novocraft/novoalign.lic -e HOST_DIR=$(pwd) variant-benchmarking:latest -S hg004 -n WES -m novoalign
 ```
 
 Note: If the directory that contains the GIAB_benchmark is somewhere else, then please change the path in -e HOST_DIR to your path (-e HOST_DIR=/path/to/your/dir).
@@ -183,19 +196,21 @@ Optional options:
  -v <gatk>          Variant Calling tool.
  -q <TRUE|FALSE>    Perform variant filtering with VQSR or not.
  -t <INT>           Number of threads.
- -c </path/to/dir>  Continue with previous main directory. You can use this if one of the processes failed.
+ -c </path/to/dir>  Continue with previous main directory.
+		    Ex: /home/Downloads/Pipeline_HG002_WES_novoalign_gatk
+		    You can use this if one of the processes failed.
                     You can specify <skip> for -m, -p, -v options if they are completed.
-                    The pipeline with find the next file required for the next process.
+                    The pipeline with find the file required for the next process.
  -h                 Print this help message.
 ```
 
-You can run ``` docker run -v </your/volume>:</your/volume> pipeline:latest ``` to view the parameters required and available.
+You can run ``` docker run variant-benchmarking:latest ``` to view the parameters required and available.
 
 ## Directories and resources
 ### Directories
 Below are the directories that will be created when you run the pipeline (some names are examples):
 ```
-your_current_working_directory
+your_current_working_directory (HOST_DIR)
 	│
 	├───> Pipeline_{sample}_{seqtype}_{maptool}_{variantcallingtool} (ex: Pipeline_HG001_WGS_novoalign_gatk)
 	│     ├──────> {maptool}_read_mapping (ex: novoalign_read_mapping)
