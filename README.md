@@ -25,7 +25,7 @@ If you are interested in reproducing the result, then you can either try run the
 ### ROC/PR curves and AUC values
 #### WGS
 
-![Figure 1: Graph of ROC/PC curves for WGS HG001 SNP_SEL](/results/WGS/HG001/happy_HG001_WGS_SNP_SEL_1.svg)
+![Figure 1: Graph of ROC/PC curves for WGS HG001 SNP_SEL](/results/WGS/HG001/happy_HG001_WGS_SNP_SEL.svg)
 ![Figure 2: Graph of ROC/PC curves for WGS HG001 INDEL_SEL](/results/WGS/HG001/happy_HG001_WGS_INDEL_SEL.svg)
 
 ![Figure 3: Graph of ROC/PC curves for WGS HG002 SNP_SEL](/results/WGS/HG002/happy_HG002_WGS_SNP_SEL_a2.svg)
@@ -40,13 +40,13 @@ If you are interested in reproducing the result, then you can either try run the
 **Table 1: AUC values for Selectively-filtered SNPs (SNP_SEL) in WGS HG001**
 |SNP_SEL|HG001|HG002|HG003|HG004|
 |---|---|---|---|---|
-|Novoalign+GATK|0.943|0.934|0.935|0.934|
+|Novoalign+GATK|0.937|0.934|0.935|0.934|
 |BWA-mem2+GATK|0.908|0.901|0.901|0.9|
 
 **Table 2: AUC values for Selectively-filtered INDELs (INDEL_SEL) in WGS HG001**
 |INDEL_SEL|HG001|HG002|HG003|HG004|
 |---|---|---|---|---|
-|Novoalign+GATK|0.980|0.967|0.966|0.966|
+|Novoalign+GATK|0.968|0.967|0.966|0.966|
 |BWA-mem2+GATK|0.952|0.958|0.961|0.96|
 
 #### WES
