@@ -40,14 +40,14 @@ If you are interested in reproducing the result, then you can either try run the
 **Table 1: AUC values for Selectively-filtered SNPs (SNP_SEL) in WGS HG001**
 |SNP_SEL|HG001|HG002|HG003|HG004|
 |---|---|---|---|---|
-|Novoalign+GATK|0.937|0.934|0.935|0.934|
-|BWA-mem2+GATK|0.908|0.901|0.901|0.9|
+|Novoalign+GATK|0.963|0.968|0.972|0.965|
+|BWA-mem2+GATK|0.965|0.964|0.963|0.963|
 
 **Table 2: AUC values for Selectively-filtered INDELs (INDEL_SEL) in WGS HG001**
 |INDEL_SEL|HG001|HG002|HG003|HG004|
 |---|---|---|---|---|
-|Novoalign+GATK|0.968|0.967|0.966|0.966|
-|BWA-mem2+GATK|0.952|0.958|0.961|0.96|
+|Novoalign+GATK|0.961|0.967|0.969|0.971|
+|BWA-mem2+GATK|0.967|0.957|0.957|0.959|
 
 #### WES
 
