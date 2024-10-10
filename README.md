@@ -25,17 +25,17 @@ If you are interested in reproducing the result, then you can either try run the
 ### ROC/PR curves and AUC values
 #### WGS
 
-![Figure 1: Graph of ROC/PC curves for WGS HG001 SNP_SEL](/results/WGS/HG001/happy_HG001_WGS_SNP_SEL.svg)
-![Figure 2: Graph of ROC/PC curves for WGS HG001 INDEL_SEL](/results/WGS/HG001/happy_HG001_WGS_INDEL_SEL.svg)
+![Figure 1: Graph of ROC/PC curves for WGS HG001 SNP_SEL](/results/WGS/HG001/happy_final_HG001_WGS_SNP_SEL_a1.svg)
+![Figure 2: Graph of ROC/PC curves for WGS HG001 INDEL_SEL](/results/WGS/HG001/happy_final_HG001_WGS_INDEL_SEL_a1.svg)
 
-![Figure 3: Graph of ROC/PC curves for WGS HG002 SNP_SEL](/results/WGS/HG002/happy_HG002_WGS_SNP_SEL_a2.svg)
-![Figure 4: Graph of ROC/PC curves for WGS HG002 INDEL_SEL](/results/WGS/HG002/happy_HG002_WGS_INDEL_SEL_a1.svg)
+![Figure 3: Graph of ROC/PC curves for WGS HG002 SNP_SEL](/results/WGS/HG002/happy_final_HG002_WGS_SNP_SEL_a1.svg)
+![Figure 4: Graph of ROC/PC curves for WGS HG002 INDEL_SEL](/results/WGS/HG002/happy_final_HG002_WGS_INDEL_SEL_a1.svg)
 
-![Figure 5: Graph of ROC/PC curves for WGS HG003 SNP_SEL](/results/WGS/HG003/happy_HG003_WGS_SNP_SEL_a2.svg)
-![Figure 6: Graph of ROC/PC curves for WGS HG003 INDEL_SEL](/results/WGS/HG003/happy_HG003_WGS_INDEL_SEL_a1.svg)
+![Figure 5: Graph of ROC/PC curves for WGS HG003 SNP_SEL](/results/WGS/HG003/happy_final_HG003_WGS_SNP_SEL_a1.svg)
+![Figure 6: Graph of ROC/PC curves for WGS HG003 INDEL_SEL](/results/WGS/HG003/happy_final_HG003_WGS_INDEL_SEL_a1.svg)
 
-![Figure 7: Graph of ROC/PC curves for WGS HG004 SNP_SEL](/results/WGS/HG004/happy_HG004_WGS_SNP_SEL_a2.svg)
-![Figure 8: Graph of ROC/PC curves for WGS HG004 INDEL_SEL](/results/WGS/HG004/happy_HG004_WGS_INDEL_SEL_a1.svg)
+![Figure 7: Graph of ROC/PC curves for WGS HG004 SNP_SEL](/results/WGS/HG004/happy_final_HG004_WGS_SNP_SEL_a1.svg)
+![Figure 8: Graph of ROC/PC curves for WGS HG004 INDEL_SEL](/results/WGS/HG004/happy_final_HG004_WGS_INDEL_SEL_a1.svg)
 
 **Table 1: AUC values for Selectively-filtered SNPs (SNP_SEL) in WGS HG001**
 |SNP_SEL|HG001|HG002|HG003|HG004|
