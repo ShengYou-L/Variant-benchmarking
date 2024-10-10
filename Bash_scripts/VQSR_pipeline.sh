@@ -83,85 +83,75 @@ fi
 
 # SNP - VariantRecalibrator
 time_func
-echo "[Process]: Start VariantRecalibrator - SNP"
-/usr/bin/time -v -o $log_dir/VQSR.stderr \
-	gatk --java-options "-Xmx${javamem}g" \
-	VariantRecalibrator \
-	-R $REF \
-	-V $INP \
-	--resource:hapmap,known=false,training=true,truth=true,prior=15.0 $res_dir/hapmap_3.3.hg38.vcf.gz \
-	--resource:omni,known=false,training=true,truth=false,prior=12.0 $res_dir/1000G_omni2.5.hg38.vcf.gz \
-	--resource:1000G,known=false,training=true,truth=false,prior=10.0 $res_dir/1000G_phase1.snps.high_confidence.hg38.vcf.gz \
-	--resource:dbsnp,known=true,training=false,truth=false,prior=2.0 $res_dir/Homo_sapiens_assembly38.dbsnp138.vcf \
-	-an QD -an MQ -an MQRankSum -an ReadPosRankSum -an FS -an SOR \
-	-mode SNP \
-	-L $REGs \
-	-O $RECAL1 \
-	--tranches-file $TRANCHES1 \
-	--rscript-file `pwd`/VRoutput_SNP.plots.R \
-	2>`pwd`/VariantRecal_SNP.log && echo "[Status]: DONE!" || echo "[Status]: Failed"
+echo "[Process] Start VariantRecalibrator - SNP"
+cmd="/usr/bin/time -v -o `pwd`/VQSR_job_log/VQSR.stderr"
+cmd="$cmd docker run -v /export:/export broadinstitute/gatk gatk --java-options -Xmx${javamem}g VariantRecalibrator"
+cmd="$cmd -R $REF -V $INP"
+cmd="$cmd --resource:hapmap,known=false,training=true,truth=true,prior=15.0 /export/home/shengyou/Downloads/Project1/Test_on_server/resources_broad_hg38_v0_hapmap_3.3.hg38.vcf.gz"
+cmd="$cmd --resource:omni,known=false,training=true,truth=false,prior=12.0 /export/home/shengyou/Downloads/Project1/Test_on_server/resources_broad_hg38_v0_1000G_omni2.5.hg38.vcf.gz"
+cmd="$cmd --resource:1000G,known=false,training=true,truth=false,prior=10.0 /export/home/shengyou/Downloads/Project1/Test_on_server/resources_broad_hg38_v0_1000G_phase1.snps.high_confidence.hg38.vcf.gz"
+cmd="$cmd --resource:dbsnp,known=true,training=false,truth=false,prior=2.0 /export/home/shengyou/Downloads/Project1/Test_on_server/resources_broad_hg38_v0_Homo_sapiens_assembly38.dbsnp138.vcf"
+cmd="$cmd -an QD -an MQ -an MQRankSum -an ReadPosRankSum -an FS -an SOR"
+if [ $ngs == "WGS" ]; then
+	cmd="$cmd -an DP"
+fi
+cmd="$cmd -mode SNP --max-gaussians 6"
+cmd="$cmd -L $REGs -O $RECAL1 --tranches-file $TRANCHES1 --rscript-file `pwd`/VRoutput_SNP.plots.R"
+
+echo -e "[Command]\n'''\n$cmd\n'''"
+$cmd 2>`pwd`/VQSR_job_log/vqsr_1.process.stderr && echo "[Status] DONE!" || echo "[Status] Failed"
 time_func
 
 # SNP - ApplyVQSR
 time_func
-echo "[Process]: Start Applying VQSR - SNP"
-/usr/bin/time -v -a -o $log_dir/VQSR.stderr \
-	gatk --java-options "-Xmx${javamem}g" \
-	ApplyVQSR \
-	-R $REF \
-	-V $INP \
-	-L $REGs \
-	-O $MID \
-	--truth-sensitivity-filter-level 99.0 \
-	--tranches-file $TRANCHES1 \
-	--recal-file $RECAL1 \
-	-mode SNP \
-	2>`pwd`/ApplyVQSR_SNP.log && echo "[Status]: DONE!" || echo "[Status]: Failed"
+echo "[Process] Start Applying VQSR - SNP"
+cmd="/usr/bin/time -v -a -o `pwd`/VQSR_job_log/VQSR.stderr"
+cmd="$cmd 	docker run -v /export:/export broadinstitute/gatk gatk --java-options -Xmx${javamem}g ApplyVQSR"
+cmd="$cmd -R $REF -V $INP -L $REGs -O $MID"
+cmd="$cmd --truth-sensitivity-filter-level 99.5 --tranches-file $TRANCHES1 --recal-file $RECAL1 -mode SNP"
+
+echo -e "[Command]\n'''\n$cmd\n'''"
+$cmd 2>`pwd`/VQSR_job_log/vqsr_2.process.stderr && echo "[Status] DONE!" || echo "[Status] Failed"
 time_func
 
 # INDEL - VariantRecalibrator
 time_func
-echo "[Process]: Start VariantRecalibrator - INDEL"
-/usr/bin/time -v -a -o $log_dir/VQSR.stderr \
-	gatk --java-options "-Xmx${javamem}g" \
-	VariantRecalibrator \
-	-R $REF \
-	-V $MID \
-	--resource:mills,known=false,training=true,truth=true,prior=12.0 $res_dir/Mills_and_1000G_gold_standard.indels.hg38.vcf.gz \
-	--resource:axiom,known=false,training=true,truth=false,prior=10.0 $res_dir/Axiom_Exome_Plus.genotypes.all_populations.poly.hg38.vcf.gz \
-	--resource:dbsnp,known=true,training=false,truth=false,prior=2.0 $res_dir/Homo_sapiens_assembly38.dbsnp138.vcf \
-	-an QD -an MQ -an MQRankSum -an ReadPosRankSum -an FS -an SOR \
-	-mode INDEL \
-	-L $REGs \
-	-O $RECAL2 \
-	--tranches-file $TRANCHES2 \
-	--rscript-file `pwd`/VRoutput_INDEL.plots.R \
-	2>`pwd`/VariantRecal_INDEL.log && echo "[Status]: DONE!" || echo "[Status]: Failed"
+echo "[Process] Start VariantRecalibrator - INDEL"
+cmd="/usr/bin/time -v -a -o `pwd`/VQSR_job_log/VQSR.stderr"
+cmd="$cmd docker run -v /export:/export broadinstitute/gatk gatk --java-options -Xmx${javamem}g VariantRecalibrator"
+cmd="$cmd -R $REF -V $MID"
+cmd="$cmd --resource:mills,known=false,training=true,truth=true,prior=12.0 /export/home/shengyou/Downloads/Project1/Test_on_server/resources_broad_hg38_v0_Mills_and_1000G_gold_standard.indels.hg38.vcf.gz"
+cmd="$cmd --resource:axiom,known=false,training=true,truth=false,prior=10.0 /export/home/shengyou/Downloads/Project1/Test_on_server/resources_broad_hg38_v0_Axiom_Exome_Plus.genotypes.all_populations.poly.hg38.vcf.gz"
+cmd="$cmd --resource:dbsnp,known=true,training=false,truth=false,prior=2.0 /export/home/shengyou/Downloads/Project1/Test_on_server/resources_broad_hg38_v0_Homo_sapiens_assembly38.dbsnp138.vcf"
+cmd="$cmd -an QD -an MQRankSum -an ReadPosRankSum -an FS -an SOR"
+if [ $ngs == "WGS" ]; then
+	cmd="$cmd -an DP"
+fi
+cmd="$cmd -mode INDEL --max-gaussians 4"
+cmd="$cmd -L $REGs -O $RECAL2 --tranches-file $TRANCHES2 --rscript-file `pwd`/VRoutput_INDEL.plots.R"
+
+echo -e "[Command]\n'''\n$cmd\n'''"
+$cmd 2>`pwd`/VQSR_job_log/vqsr_3.process.stderr && echo "[Status] DONE!" || echo "[Status] Failed"
 time_func
 
 # INDEL - ApplyVQSR
 time_func
-echo "[Process]: Start Applying VQSR - INDEL"
-/usr/bin/time -v -a -o $log_dir/VQSR.stderr \
-	gatk --java-options "-Xmx${javamem}g" \
-	ApplyVQSR \
-	-R $REF \
-	-V $MID \
-	-L $REGs \
-	-O $OUT \
-	--truth-sensitivity-filter-level 99.0 \
-	--tranches-file $TRANCHES2 \
-	--recal-file $RECAL2 \
-	-mode INDEL \
-	2>`pwd`/ApplyVQSR_INDEL.log && echo "[Status]: DONE!" || echo "[Status]: Failed"
+echo "[Process] Start Applying VQSR - INDEL"
+cmd="/usr/bin/time -v -a -o `pwd`/VQSR_job_log/VQSR.stderr"
+cmd="$cmd 	docker run -v /export:/export broadinstitute/gatk gatk --java-options -Xmx${javamem}g ApplyVQSR"
+cmd="$cmd -R $REF -V $MID -L $REGs -O $OUT"
+cmd="$cmd --truth-sensitivity-filter-level 99.0 --tranches-file $TRANCHES2 --recal-file $RECAL2 -mode INDEL"
+
+echo -e "[Command]\n'''\n$cmd\n'''"
+$cmd 2>`pwd`/VQSR_job_log/vqsr_4.process.stderr && echo "[Status] DONE!" || echo "[Status] Failed"
 time_func
 
 # Check if filtered VCF file exists or not
 if [ -f $OUT ]; then 
 	echo "[Status]: Variant called and filtered. Variant calling and filtering completed."
-	echo "Removing intermediate files..."
+	echo "[Notice] Removing intermediate files..."
 	rm -f $TRANCHES1 $RECAL1 $RECAL1.idx $TRANCHES2 $RECAL2 $RECAL2.idx $MID $MID.tbi && \
-		echo "Finish removing intermediate files"
+		echo "[Notice] Finish removing intermediate files"
 else
 	echo "[ERROR]: Filtered variants file not found. Exiting..."
 	exit 1
