@@ -37,13 +37,13 @@ If you are interested in reproducing the result, then you can either try run the
 ![Figure 7: Graph of ROC/PC curves for WGS HG004 SNP_SEL](/results/WGS/HG004/happy_final_HG004_WGS_SNP_SEL_a1.svg)
 ![Figure 8: Graph of ROC/PC curves for WGS HG004 INDEL_SEL](/results/WGS/HG004/happy_final_HG004_WGS_INDEL_SEL_a1.svg)
 
-**Table 1: AUC values for Selectively-filtered SNPs (SNP_SEL) in WGS HG001**
+**Table 1: AUC values for Selectively-filtered SNPs (SNP_SEL) in WGS**
 |SNP_SEL|HG001|HG002|HG003|HG004|
 |---|---|---|---|---|
 |Novoalign+GATK|0.963|0.968|0.972|0.965|
 |BWA-mem2+GATK|0.965|0.964|0.963|0.963|
 
-**Table 2: AUC values for Selectively-filtered INDELs (INDEL_SEL) in WGS HG001**
+**Table 2: AUC values for Selectively-filtered INDELs (INDEL_SEL) in WGS**
 |INDEL_SEL|HG001|HG002|HG003|HG004|
 |---|---|---|---|---|
 |Novoalign+GATK|0.961|0.967|0.969|0.971|
@@ -63,13 +63,13 @@ If you are interested in reproducing the result, then you can either try run the
 ![Figure 7: Graph of ROC/PC curves for WES sample SNP_SEL](/results/WES/HG004/happy_HG004_WES_SNP_SEL_a2.svg)
 ![Figure 8: Graph of ROC/PC curves for WES sample INDEL_SEL](/results/WES/HG004/happy_HG004_WES_INDEL_SEL_a1.svg)
 
-**Table 1: AUC values for Selectively-filtered SNPs (SNP_SEL) in WES HG001**
+**Table 1: AUC values for Selectively-filtered SNPs (SNP_SEL) in WES**
 |SNP_SEL|HG001|HG002|HG003|HG004|
 |---|---|---|---|---|
 |Novoalign+GATK|0.918|0.916|0.916|0.913|
 |BWA-mem2+GATK|0.913|0.906|0.912|0.910|
 
-**Table 2: AUC values for Selectively-filtered INDELs (INDEL_SEL) in WES HG001**
+**Table 2: AUC values for Selectively-filtered INDELs (INDEL_SEL) in WES**
 |INDEL_SEL|HG001|HG002|HG003|HG004|
 |---|---|---|---|---|
 |Novoalign+GATK|0.810|0.796|0.842|0.847|
